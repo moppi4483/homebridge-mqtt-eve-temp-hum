@@ -1,0 +1,37 @@
+{
+  "name": "homebridge-mqtt-eve-temp-hum",
+  "version": "0.0.1",
+  "description": "A HomeBridge plugin for MQTT temperature sensors (EVE).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moppi4483/homebridge-mqtt-eve-temp-hum.git"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "keywords": [
+    "homebridge-plugin",
+    "mqtt",
+    "temperature",
+    "eve"
+  ],
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "author": "moppi4483",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moppi4483/homebridge-mqtt-eve-temp-hum/issues"
+  },
+  "homepage": "https://github.com/moppi4483/homebridge-mqtt-eve-temp-hum",
+  "dependencies": {
+    "mqtt": "^1.12.0"
+  },
+  "devDependencies": {}
+}
