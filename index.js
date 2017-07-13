@@ -74,7 +74,8 @@ function EVETempHum(log, config) {
     var that = this;
     this.client.subscribe(this.topic);
 
-    this.client.on('message', function (topic, message) {
+    this.client.on('message', function (topic, message) 
+    {
         // message is Buffer
         if (topic == that.topic) {
             data = JSON.parse(message);
@@ -87,7 +88,7 @@ function EVETempHum(log, config) {
             that.service.setCharacteristic(Characteristic.CurrentTemperature, that.temperature);
             that.service.setCharacteristic(Characteristic.CurrentRelativeHumidity, that.humidity);
         }
-    );
+    });
 
     this.service
         .getCharacteristic(Characteristic.CurrentTemperature)
