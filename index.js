@@ -43,7 +43,6 @@ function EVETempHum(log, config) {
 		clean               : true,
 		reconnectPeriod     : 1000,
 		connectTimeout      : 30 * 1000,
-        serialnumber        : config["serial"] || this.client_Id,
         max_temperature     : config["maxTemperature"] || 100,
         min_temperature     : config["minTemperature"] || -50,
         max_humidity        : config["maxHumidity"] || 100,
