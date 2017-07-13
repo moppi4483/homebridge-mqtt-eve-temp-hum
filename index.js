@@ -10,7 +10,7 @@ module.exports = function(homebridge) {
     homebridge.registerAccessory("homebridge-mqtt-eve-temp-hum", "mqtt-eve-temp-hum", EVETempHum);
 
 
-    EveService.WeatherService = function(displayName, subtype) {
+    EveService.KlimaService = function(displayName, subtype) {
         Service.call(this, displayName, 'E863F001-079E-48FF-8F27-9C2605A29F52', subtype);
         this.addCharacteristic(Characteristic.CurrentTemperature);
         this.addCharacteristic(Characteristic.CurrentRelativeHumidity);
@@ -61,15 +61,15 @@ function EVETempHum(log, config) {
 
     this.informationService = new Service.AccessoryInformation();
 	this.informationService
-		.setCharacteristic(Characteristic.Name, this.name)
         .setCharacteristic(Characteristic.Manufacturer, "moppi4483")
         .setCharacteristic(Characteristic.Model, "Eigenbau")
         .setCharacteristic(Characteristic.SerialNumber, "0002");
 
 
-    this.service = new EveService.WeatherService(this.name);
+    this.service = new EveService.KlimaService(this.name);
     this.client  = mqtt.connect(this.url, this.options);
 
+    this.loggingService = new EveService.Logging(this.name);
 
     var that = this;
     this.client.subscribe(this.topic);
@@ -78,6 +78,7 @@ function EVETempHum(log, config) {
     {
         // message is Buffer
         if (topic == that.topic) {
+            that.log(that.name + " - New Message");
             data = JSON.parse(message);
 
             if (data === null) {return null}
@@ -123,5 +124,10 @@ EVETempHum.prototype.getState = function(callback) {
 }
 
 EVETempHum.prototype.getServices = function() {
-    return [this.informationService, this.service];
+    return [this.informationService, this.service, this.loggingService];
+}
+
+EVETempHum.prototype.identify = function(callback) {
+    this.log("Identify requested!");
+    callback(); // success,
 }
