@@ -3,6 +3,8 @@ var mqtt    = require('mqtt');
 var inherits = require('util').inherits;
 
 var EveService = {};
+var klimaService;
+
 
 module.exports = function(homebridge) {
     Service = homebridge.hap.Service;
@@ -16,7 +18,7 @@ module.exports = function(homebridge) {
         this.addCharacteristic(Characteristic.CurrentRelativeHumidity);
         //this.addCharacteristic(CustomCharacteristic.AirPressure);
     };
-    inherits(EveService.WeatherService, Service);
+    inherits(EveService.KlimaService, Service);
     
     EveService.Logging = function(displayName, subtype) {
         Service.call(this, displayName, 'E863F007-079E-48FF-8F27-9C2605A29F52', subtype);
@@ -66,7 +68,7 @@ function EVETempHum(log, config) {
         .setCharacteristic(Characteristic.SerialNumber, "0002");
 
 
-    this.service = new EveService.KlimaService(this.name);
+    this.klimaService = new EveService.KlimaService(this.name);
     this.client  = mqtt.connect(this.url, this.options);
 
     this.loggingService = new EveService.Logging(this.name);
@@ -86,36 +88,24 @@ function EVETempHum(log, config) {
             that.temperature = parseFloat(data.temperature);
             that.humidity = parseInt(data.humidity)
 
-            that.service.setCharacteristic(Characteristic.CurrentTemperature, that.temperature);
-            that.service.setCharacteristic(Characteristic.CurrentRelativeHumidity, that.humidity);
+			that.log("Temperature: " + that.temperature + "; Humidity: " + that.humidity);
+            that.klimaService.setCharacteristic(Characteristic.CurrentTemperature, that.temperature);
+            that.klimaService.setCharacteristic(Characteristic.CurrentRelativeHumidity, that.humidity);
         }
     });
 
-    this.service
+    this.klimaService
         .getCharacteristic(Characteristic.CurrentTemperature)
         .on('get', this.getState.bind(this));
-    this.service
+    this.klimaService
         .getCharacteristic(Characteristic.CurrentTemperature)
         .setProps({minValue: this.options["min_temperature"]});
-    this.service
+    this.klimaService
         .getCharacteristic(Characteristic.CurrentTemperature)
         .setProps({maxValue: this.options["max_temperature"]});
-    this.service
+    this.klimaService
         .getCharacteristic(Characteristic.CurrentTemperature)
         .setProps({minStep: 0.1});
-
-    this.service
-        .getCharacteristic(Characteristic.CurrentRelativeHumidity)
-        .on('get', this.getState.bind(this));
-    this.service
-        .getCharacteristic(Characteristic.CurrentRelativeHumidity)
-        .setProps({minValue: this.options["min_humidity"]});
-    this.service
-        .getCharacteristic(Characteristic.CurrentRelativeHumidity)
-        .setProps({maxValue: this.options["max_humidity"]});
-    this.service
-        .getCharacteristic(Characteristic.CurrentRelativeHumidity)
-        .setProps({minStep: 1});
 }
 
 EVETempHum.prototype.getState = function(callback) {
@@ -124,7 +114,7 @@ EVETempHum.prototype.getState = function(callback) {
 }
 
 EVETempHum.prototype.getServices = function() {
-    return [this.informationService, this.service, this.loggingService];
+    return [this.informationService, this.klimaService, this.loggingService];
 }
 
 EVETempHum.prototype.identify = function(callback) {
