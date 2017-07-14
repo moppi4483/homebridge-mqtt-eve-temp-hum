@@ -12,7 +12,7 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
 This Plugin based on [homebridge-mqtt-temperature](https://github.com/mcchots/homebridge-mqtt-temperature)
 
 # Release notes
-VERSION 0.1.1
+VERSION 0.1.2
 + Bugfixes
 
 VERSION 0.1.0

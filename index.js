@@ -37,7 +37,9 @@ function EVETempHum(log, config) {
     this.url            = config['url'];
     this.topicGet       = config['topicGet'];
     this.topicSet       = config['topicSet'];
-    this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);7
+    this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
+    this.temperature    = 0;
+    this.humidity       = 0;
     this.options        = {
         keepalive           : 10,
         clientId            : this.client_Id,

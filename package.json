@@ -1,6 +1,6 @@
 {
   "name": "homebridge-mqtt-eve-temp-hum",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A HomeBridge plugin for MQTT temperature sensors (EVE).",
   "main": "index.js",
   "scripts": {
