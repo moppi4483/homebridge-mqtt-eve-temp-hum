@@ -35,7 +35,8 @@ function EVETempHum(log, config) {
     this.log            = log;
     this.name           = config["name"];
     this.url            = config['url'];
-    this.topic          = config['topic'];
+    this.topicGet       = config['topicGet'];
+    this.topicSet       = config['topicSet'];
     this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);7
     this.options        = {
         keepalive           : 10,
@@ -61,6 +62,8 @@ function EVETempHum(log, config) {
 	};
 
 
+    this.statusCmd      = "newData";
+
     this.informationService = new Service.AccessoryInformation();
 	this.informationService
         .setCharacteristic(Characteristic.Manufacturer, "moppi4483")
@@ -74,12 +77,12 @@ function EVETempHum(log, config) {
     this.loggingService = new EveService.Logging(this.name);
 
     var that = this;
-    this.client.subscribe(this.topic);
+    this.client.subscribe(this.topicGet);
 
     this.client.on('message', function (topic, message) 
     {
         // message is Buffer
-        if (topic == that.topic) {
+        if (topic == that.topicGet) {
             that.log(that.name + " - New Message");
             data = JSON.parse(message);
 
@@ -109,15 +112,12 @@ function EVETempHum(log, config) {
 }
 
 EVETempHum.prototype.getState = function(callback) {
-    this.log(this.name, " - MQTT : ", this.temperature);
+    if (this.statusCmd !== undefined) {
+    	this.client.publish(this.topicSet, this.statusCmd, this.publish_options);
+    }
     callback(null, this.temperature);
 }
 
 EVETempHum.prototype.getServices = function() {
     return [this.informationService, this.klimaService, this.loggingService];
-}
-
-EVETempHum.prototype.identify = function(callback) {
-    this.log("Identify requested!");
-    callback(); // success,
 }

@@ -12,6 +12,9 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
 This Plugin based on [homebridge-mqtt-temperature](https://github.com/mcchots/homebridge-mqtt-temperature)
 
 # Release notes
+VERSION 0.1.1
++ Bugfixes
+
 VERSION 0.1.0
 + Initial Release
 
@@ -23,7 +26,8 @@ Remember to configure the plugin in config.json in your home directory inside th
     "url"           : "PUT URL OF THE BROKER HERE",
     "username"      : "OPTIONALLY PUT USERNAME OF THE BROKER HERE",
     "password"      : "OPTIONALLY PUT PASSWORD OF THE BROKER HERE",
-    "topic"         : "PUT THE MQTT TOPIC FOR GETTING THE DATA OF THE ACCESSORY HERE",
+    "topicGet"      : "PUT THE MQTT TOPIC FOR GETTING THE DATA OF THE ACCESSORY HERE",
+    "topicSet"      : "PUT THE MQTT TOPIC FOR REQUESTING A REFRESH OF THE DATA OF THE ACCESSORY HERE",
     "maxTemperature": "OPTIONALLY PUT THE MAX-TEMPERATUR OF THE ACCESSORY HERE (DEFAULT 100)",
     "minTemperature": "OPTIONALLY PUT THE MIN-TEMPERATUR OF THE ACCESSORY HERE (DEFAULT -50)"
 
