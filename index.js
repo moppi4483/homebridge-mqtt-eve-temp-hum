@@ -64,7 +64,7 @@ function EVETempHum(log, config) {
 	};
 
 
-    this.statusCmd      = "newData";
+    this.statusCmd      = 0;
 
     this.informationService = new Service.AccessoryInformation();
 	this.informationService
@@ -115,7 +115,7 @@ function EVETempHum(log, config) {
 
 EVETempHum.prototype.getState = function(callback) {
     if (this.statusCmd !== undefined) {
-    	this.client.publish(this.topicSet, this.statusCmd, this.options);
+    	this.client.publish(this.topicSet, this.statusCmd, this.options, callback);
     }
     callback(null, this.temperature, this.humidity);
 }
