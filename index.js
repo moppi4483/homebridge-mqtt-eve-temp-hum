@@ -85,7 +85,6 @@ function EVETempHum(log, config) {
     {
         // message is Buffer
         if (topic == that.topicGet) {
-            that.log(that.name + " - New Message");
             data = JSON.parse(message);
 
             if (data === null) {return null}
@@ -99,6 +98,7 @@ function EVETempHum(log, config) {
         }
     });
 
+    /*
     this.klimaService
         .getCharacteristic(Characteristic.CurrentTemperature)
         .on('get', this.getState.bind(this));
@@ -110,14 +110,14 @@ function EVETempHum(log, config) {
         .setProps({maxValue: this.options["max_temperature"]});
     this.klimaService
         .getCharacteristic(Characteristic.CurrentTemperature)
-        .setProps({minStep: 0.1});
+        .setProps({minStep: 0.1});*/
 }
 
 EVETempHum.prototype.getState = function(callback) {
     if (this.statusCmd !== undefined) {
     	this.client.publish(this.topicSet, this.statusCmd, this.publish_options);
     }
-    callback(null, this.temperature);
+    callback(null, this.temperature, this.humidity);
 }
 
 EVETempHum.prototype.getServices = function() {
