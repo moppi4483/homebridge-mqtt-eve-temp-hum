@@ -115,7 +115,7 @@ function EVETempHum(log, config) {
 
 EVETempHum.prototype.getState = function(callback) {
     if (this.statusCmd !== undefined) {
-    	this.client.publish(this.topicSet, this.statusCmd, this.publish_options);
+    	this.client.publish(this.topicSet, this.statusCmd, this.options);
     }
     callback(null, this.temperature, this.humidity);
 }
