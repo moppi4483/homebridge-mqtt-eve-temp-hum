@@ -1,7 +1,7 @@
 {
   "name": "homebridge-mqtt-eve-temp-hum",
-  "version": "0.1.5",
-  "description": "A HomeBridge plugin for MQTT temperature sensors (EVE).",
+  "version": "0.9.0",
+  "description": "A HomeBridge plugin for MQTT temperature sensors (EVE) including History-Data.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,17 +12,21 @@
   },
   "files": [
     "index.js",
-    "README.md"
+    "README.md",
+    "lib/"
   ],
   "keywords": [
     "homebridge-plugin",
     "mqtt",
     "temperature",
-    "eve"
+    "eve",
+    "humidity",
+    "fakegato",
+    "history"
   ],
   "engines": {
-    "node": ">=0.12.0",
-    "homebridge": ">=0.2.0"
+    "node": ">=6.13.0",
+    "homebridge": ">=0.4.0"
   },
   "author": "moppi4483",
   "license": "MIT",
@@ -31,7 +35,8 @@
   },
   "homepage": "https://github.com/moppi4483/homebridge-mqtt-eve-temp-hum",
   "dependencies": {
-    "mqtt": "^1.12.0"
+    "mqtt": "1.12.0",
+    "fakegato-history": "^0.5.0"
   },
   "devDependencies": {}
 }
