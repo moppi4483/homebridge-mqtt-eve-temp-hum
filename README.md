@@ -12,7 +12,7 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
 This Plugin based on [homebridge-mqtt-temperature](https://github.com/mcchots/homebridge-mqtt-temperature)
 
 # Release notes
-VERSION 1.0.2
+VERSION 1.0.3
 + minor fixes
 
 VERSION 1.0.0
@@ -34,6 +34,7 @@ Remember to configure the plugin in config.json in your home directory inside th
     "username"          : "OPTIONALLY PUT USERNAME OF THE BROKER HERE",
     "password"          : "OPTIONALLY PUT PASSWORD OF THE BROKER HERE",
     "topic"             : "PUT THE MQTT TOPIC FOR GETTING THE DATA OF THE ACCESSORY HERE",
-    "fakeGatoEnabled"   : true / false
+    "fakeGatoEnabled"   : true / false,
+    "serialNumber"      : "Serialnumber"
 
 Look for a sample config in [config.json example](https://github.com/moppi4483/homebridge-mqtt-eve-temp-hum/blob/master/config.json)
