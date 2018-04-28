@@ -9,9 +9,12 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
     sudo npm install -g --unsafe-perm homebridge-mqtt-eve-temp-hum
 
 # Information
-This Plugin based on [homebridge-mqtt-temperature](https://github.com/mcchots/homebridge-mqtt-temperature)
+This Plugin based on [homebridge-mi-hygrothermograph](https://github.com/hannseman/homebridge-mi-hygrothermograph)
 
 # Release notes
+VERSION 1.1.0
++ updated README
+
 VERSION 1.0.6
 + minor fixes
 
@@ -38,3 +41,7 @@ Remember to configure the plugin in config.json in your home directory inside th
     "serialNumber"      : "Serialnumber"
 
 Look for a sample config in [config.json example](https://github.com/moppi4483/homebridge-mqtt-eve-temp-hum/blob/master/config.json)
+
+# Important
+The datastructure of the topic is: {"temperature":"value", "humidity":"value"}
+If you are using multiple accessories with historical data, you need to set a unique serialNumber in the config-file.
